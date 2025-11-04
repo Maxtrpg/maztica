@@ -263,6 +263,9 @@ header p{margin-top:8px;font-size:1.1rem;color:#fffbe8}
   cursor:pointer;
   transition:background .25s,color .25s,transform .25s;
 }
+  .member-buttons button span{
+  font-size: 0.7rem; /* 改成你希望的字體大小 */
+}
 .member-buttons button.active,
 .member-buttons button:hover{
   background:var(--gold);
@@ -726,7 +729,7 @@ function bindSubButtons(root,tab){
 function bindGuild(root){
   // 生成成員資料列表，可依需求填入實際資訊
   const toSlug = s => s.normalize('NFD').replace(/[^\w]/g,'');
-  const names = ['帕庫塔','埃維爾','烏姆.帕蘇克','媞娜','奇烏科瓦','庫克','努巴夏','澤雷','伊茲跨烏膩','莫士','烏拉呱呱','約瓦利','托納爾','靜靜','瑪諾亞','伊文.狸影','夸烏特利','波塔．帕比','特拉納瓦特爾'];
+  const names = ['帕庫塔','埃維爾','烏姆.帕蘇克','媞娜','奇烏科瓦','庫克','努巴夏','澤雷','伊茲跨烏膩','莫士','烏拉呱呱','約瓦利','托納爾','靜靜','瑪諾亞','伊文.狸影','夸烏特利','波塔．帕比','特拉納瓦特爾','祖瑪'];
 const members = [
   {
     slug: '0',
@@ -750,7 +753,7 @@ const members = [
   },
   {
     slug: '2',
-    name: '烏姆.帕蘇克',
+    name: '烏姆．帕蘇克',
     race: '(隊名未定)',
     class: '人類(狗民)/學者(天律學)',
     desc: '【無】',
@@ -760,7 +763,7 @@ const members = [
   },
   {
     slug: '3',
-    name: '媞娜.蒂拉',
+    name: '媞娜．蒂拉',
     race: '(隊名未定)',
     class: '豹人(豹貓人)/戰士',
     desc: '【火辣椒征服者】',
@@ -820,7 +823,7 @@ const members = [
   },
   {
     slug: '9',
-    name: '莫士',
+    name: '莫士．普勒拉蒂',
     race: '(隊名未定)',
     class: '精靈(木精靈)/靈魂薩滿',
     desc: '【無】',
@@ -880,7 +883,7 @@ const members = [
   },
     {
     slug: '15',
-    name: '伊文·貍影',
+    name: '伊文．貍影',
     race: '(隊名未定)',
     class: '蜥蜴人/盜賊',
     desc: '【無】',
@@ -890,7 +893,7 @@ const members = [
   },
    {
     slug: '16',
-    name: '夸烏特利‧月羽',
+    name: '夸烏特利．月羽',
     race: '(隊名未定)',
     class: '鷹人/羽術薩滿',
     desc: '【無】',
