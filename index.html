@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>龍與魔：馬茲提卡戰役</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Lato:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="custom-cursor" class="custom-cursor"></div>
+    <div class="ritual-vignette"></div>
+    <div class="ritual-overlay"></div>
+
+    <nav class="game-hud">
+        <div class="hud-left">
+            <div class="guild-sign" title="佩澤拉克冒險者公會">馬茲提卡 MAZTICA</div>
+            <div class="disclaimer">由於阿茲特克素材不易取得，本戰役團務中會使用大量AI素材</div>
+        </div>
+
+        <div class="nav-tabs hidden-init">
+            <button class="tab-btn" onclick="switchScene('map')" data-target="map">世界地圖</button>
+            <button class="tab-btn" onclick="switchScene('character')" data-target="character">命運輪盤</button>
+            <button class="tab-btn" onclick="switchScene('guild')" data-target="guild">公會大廳</button>
+        </div>
+
+        <div class="hud-right">
+            <div class="gm-contact">若有任何問題，請洽詢 GM 麥斯</div>
+            <div class="audio-control-panel">
+                <button id="play-pause-btn" class="icon-btn" title="播放/暫停 BGM">
+                    <svg id="icon-play" class="svg-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg id="icon-pause" class="svg-icon hidden" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                </button>
+                <div class="volume-slider-container">
+                    <button id="mute-btn" class="icon-btn small" title="靜音">
+                        <svg id="icon-vol-high" class="svg-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                        <svg id="icon-vol-mute" class="svg-icon hidden" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                    </button>
+                    <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.4">
+                </div>
+                <button class="icon-btn guide-parrot-trigger" title="播放引導語音" onclick="triggerParrot()">
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="intro" class="game-scene active">
+        <div class="intro-background-group">
+            <div class="particles"></div>
+            <div class="parallax-container">
+                <div class="parallax-layer layer-bg-night" data-speed="0.02"></div> 
+                <div class="parallax-layer layer-mid-night" data-speed="0.05"></div> 
+                <div class="parallax-layer layer-fg-night" data-speed="0.1"></div>
+                <div class="fire-glow-overlay"></div>
+            </div>
+            <div class="orb-flotation-area left-orbs" id="left-orbs-zone"></div>
+            <div class="orb-flotation-area right-orbs" id="right-orbs-zone"></div>
+        </div>
+
+        <div class="hero-content ritual-altar">
+            <div class="hero-narrative wide-narrative">
+                </div>
+            <button class="cta-button" onclick="enterWorld('map')" data-cursor="hover">
+                [ 踏入馬茲提卡大陸 ]
+            </button>
+        </div>
+    </section>
+
+    <div id="orb-tooltip-popup" class="orb-tooltip"></div>
+    
+    <div id="location-popup" class="location-popup">
+        <button class="popup-close-btn" onclick="hideLocationPopup()">×</button>
+        <div class="popup-visual">
+            <img id="loc-img" src="" alt="地點景觀">
+            <div class="popup-rim"></div>
+        </div>
+        <div class="popup-content">
+            <h3 id="loc-name" class="text-gold">地點名稱</h3>
+            <p id="loc-desc">地點描述...</p>
+        </div>
+    </div>
+
+    <section id="system" class="game-scene"><h2 class="section-title"></h2></section>
+
+    <section id="map" class="game-scene">
+        <div class="map-intro-text">
+            <h3 class="text-gold">馬茲提卡大陸</h3>
+            <p>馬茲提卡為原 DND 世界中的一塊中美洲風格大陸，取材自阿茲特克文明。</p>
+            <p>戰役中開始會先圍繞在較安全的佩澤拉克附近，隨著冒險推進，將會逐步前往更加偏遠和危險的地方。</p>
+        </div>
+        <div class="map-stage-container">
+            <div class="map-viewport-wide">
+                <div class="map-vfx-layer"></div>
+                <div class="map-threat-layer"></div>
+                <div id="map-hotspots-layer"></div>
+            </div>
+        </div>
+        <div class="classes-list"><p>※ 點擊箭頭查看地區詳情</p></div>
+    </section>
+
+    <section id="character" class="game-scene">
+        <h2 class="section-title">命運之輪</h2>
+        <div class="fate-layout">
+            <div class="prophecy-panel left-panel" id="panel-race">
+                <h3 class="prophecy-title">族裔</h3>
+                <div class="prophecy-content">
+                    <h2 id="race-name" class="text-gold">人類</h2>
+                    <div class="tags-container" id="race-tags"></div>
+                    <div class="desc-scroll-box"><p id="race-desc">...</p></div>
+                </div>
+            </div>
+            <div class="aztec-wheel-container">
+                <div class="wheel-ring ring-outer" id="calling-ring"></div>
+                <div class="wheel-ring ring-inner" id="lineage-ring"></div>
+                <div class="wheel-core-display">
+                    <div class="portrait-frame"><img id="main-portrait" src="" alt="角色立繪"></div>
+                    <div class="portrait-rim"></div>
+                </div>
+            </div>
+            <div class="prophecy-panel right-panel" id="panel-class">
+                <h3 class="prophecy-title">職業範型</h3>
+                <div class="prophecy-content">
+                    <div class="stats-box-mini">
+                        <div class="stat-row-mini"><span class="mini-label">戰鬥</span><div class="bar-mini"><div id="stat-cbt"></div></div></div>
+                        <div class="stat-row-mini"><span class="mini-label">探索</span><div class="bar-mini"><div id="stat-exp"></div></div></div>
+                        <div class="stat-row-mini"><span class="mini-label">社交</span><div class="bar-mini"><div id="stat-soc"></div></div></div>
+                    </div>
+                    <h2 id="class-name" class="text-gold">工匠</h2>
+                    <div class="tags-container" id="class-tags"></div>
+                    <div class="desc-scroll-box"><p id="class-desc">...</p></div>
+                </div>
+            </div>
+        </div>
+        <div class="classes-list"><p>※ 轉動圓盤，預言你的命運組合</p></div>
+    </section>
+
+    <section id="guild" class="game-scene guild-hall-scene">
+        <div class="guild-bg"></div>
+        
+        <div class="scenario-accordion">
+            <div class="scenario-card" data-id="1">
+                <div class="card-visual">
+                    <img src="images/scenario_1.webp" alt="懸旗節">
+                    <div class="visual-overlay"></div>
+                    <h3 class="card-title-overlay">懸旗節－裂羽之兆</h3>
+                </div>
+                <div class="scenario-details">
+                    <h2 class="detail-title text-gold">懸旗節－裂羽之兆</h2>
+                    <div class="detail-meta">
+                        <span class="meta-tag"><span class="icon">⏳</span> 約 4 小時</span>
+                        <span class="meta-tag"><span class="icon">💰</span> 350元 / 人</span>
+                    </div>
+                    <div class="detail-desc">
+                        <p>每年此時，各地城邦會為古老的懸旗節做準備—— 那是紀念世界之母 Maztica 的夜晚，也是象徵黑暗將被擊碎、生命再度循環的日子。</p>
+                        <p>傳說中，馬茲提卡曾在遠古的戰火中殞落於她的子嗣之手， 卻以更深的方式留在這片土地： 她的氣息在旗上飄揚、在河海裡回響，守護著後世的每一次重生。</p>
+                        <p>今年的節慶看似如常，破邪偶已塑成、彩旗已升起， 然而神殿中卻出現一些難以言說的細微變化—— 火光忽暗、旗影紊亂、供桌下傳來不自然的震動。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scenario-card" data-id="2">
+                <div class="card-visual">
+                    <img src="images/scenario_2.webp" alt="溺玉之屋">
+                    <div class="visual-overlay"></div>
+                    <h3 class="card-title-overlay">溺玉之屋</h3>
+                </div>
+                <div class="scenario-details">
+                    <h2 class="detail-title text-gold">溺玉之屋</h2>
+                    <div class="detail-meta">
+                        <span class="meta-tag"><span class="icon">⏳</span> 約 4 小時</span>
+                        <span class="meta-tag"><span class="icon">💰</span> 350元 / 人</span>
+                    </div>
+                    <div class="detail-desc">
+                        <p>天空中，厚重的烏雲低垂，隱約的雷光像發怒的蛇一樣在雲層間穿梭，將海面映照得慘白。</p>
+                        <p>坐在船頭的嚮導，那個只有一隻眼睛的帕伊特老漁夫，緩緩轉過身來。他那隻被翡翠眼罩覆蓋的左眼在雷光下顯得格外詭異......你們將深入被淹沒的遺跡，尋找失落的玉石，但要小心，水底的東西也在尋找你們。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scenario-card" data-id="3">
+                <div class="card-visual">
+                    <img src="images/scenario_3.webp" alt="末路客棧">
+                    <div class="visual-overlay"></div>
+                    <h3 class="card-title-overlay">末路客棧</h3>
+                </div>
+                <div class="scenario-details">
+                    <h2 class="detail-title text-gold">末路客棧</h2>
+                    <div class="detail-meta">
+                        <span class="meta-tag"><span class="icon">⏳</span> 約 5-6 小時</span>
+                        <span class="meta-tag"><span class="icon">💰</span> 450元 / 人</span>
+                    </div>
+                    <div class="detail-desc">
+                        <p>你們已經在茂密的雨林中跋涉了數日，翠綠的樹冠遮蔽了天空。隨著太陽逐漸西沉，叢林深處傳來了狩豹低沉的咆哮。</p>
+                        <p>就在水源耗盡之時，一座古老而堅固的石造建築映入眼簾——「末路客棧」。這是一場關於生存、社交與抉擇的考驗，每個選擇都將決定誰能見到明天的太陽。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="npc-container">
+            <img src="https://nlhqslyecdmwqdrtluki.supabase.co/storage/v1/object/public/NPC/npc-Itotia.webp" alt="公會櫃台人員" class="npc-img">
+        </div>
+        
+        <div class="dialogue-box">
+            <a href="https://forms.gle/29GsdcxZWoe9Rkcv6" target="_blank" class="contract-floating-icon" title="填寫入會申請書">
+                <div class="icon-glow"></div>
+                <img src="images/icon_scroll.webp" alt="入會申請">
+                <span class="icon-label">入會申請</span>
+            </a>
+            <div class="dialogue-name">公會人員 依托蒂雅</div>
+            <div class="dialogue-text">
+                「歡迎來到佩澤拉克冒險者公會！年輕的托納利啊，你渴望榮耀還是財富？歡迎填寫申請加入成為公會冒險者的一員。上方有些新人推薦任務可以參考。」
+            </div>
+        </div>
+        <div class="copyright">© 2024 Maztica Campaign Guide</div>
+    </section>
+
+    <audio id="bgm-audio" loop><source src="audio/bgm_ritual_night.mp3" type="audio/mpeg"></audio>
+    <div class="guide-parrot" title="點我聽吐槽"><img src="images/guide_parrot.webp" alt="柯羅拉克斯鸚鵡"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
