@@ -1,4 +1,4 @@
-/* style.css - 最終手機優化版 v34.0 */
+/* style.css - 終極修復版 v33.0 (介面文字補強與彈窗修復) */
 
 :root {
     --color-bg-jungle: #2E8B57;
@@ -25,10 +25,8 @@ body {
     overflow-x: hidden; min-height: 100vh;
 }
 
-/* 全局隱藏系統游標 (僅限非觸控裝置) */
-@media (hover: hover) and (pointer: fine) {
-    body, a, button, .map-pin, .wheel-item, .info-orb, .guide-parrot, .scenario-card, .contract-floating-icon, .popup-close-btn { cursor: none !important; }
-}
+/* 全局隱藏系統游標 */
+body, a, button, .map-pin, .wheel-item, .info-orb, .guide-parrot, .scenario-card, .contract-floating-icon, .popup-close-btn { cursor: none !important; }
 
 /* 音量滑桿 */
 input[type=range] {
@@ -51,17 +49,13 @@ h1, h2, h3, .section-title, .guild-sign, .text-gold {
     font-weight: 700; letter-spacing: 1px;
 }
 
-/* 自訂游標 (僅限非觸控裝置顯示) */
+/* 自訂游標 */
 .custom-cursor {
-    display: none; /* 預設隱藏 */
     position: fixed; top: 0; left: 0; width: 32px; height: 32px;
     pointer-events: none; z-index: 9999;
     background-image: url('images/cursor_feather.webp'); 
     background-size: contain; background-repeat: no-repeat;
     transform: translate(-50%, -50%); transition: transform 0.1s ease-out;
-}
-@media (hover: hover) and (pointer: fine) {
-    .custom-cursor { display: block; } /* 有滑鼠時才顯示 */
 }
 .custom-cursor.hover { transform: translate(-50%, -50%) scale(1.3); background-image: url('images/cursor_obsidian.webp'); }
 
@@ -100,6 +94,7 @@ h1, h2, h3, .section-title, .guild-sign, .text-gold {
     padding: 0 2rem; z-index: 1000; 
 }
 
+/* [新增] 左側容器與免責聲明 */
 .hud-left { display: flex; flex-direction: column; align-items: flex-start; }
 .disclaimer {
     font-size: 0.75rem; color: #aaa; font-style: italic;
@@ -128,6 +123,7 @@ h1, h2, h3, .section-title, .guild-sign, .text-gold {
 }
 .tab-btn.active::after { width: 60%; }
 
+/* [新增] 右側容器與GM聯絡資訊 */
 .hud-right { display: flex; align-items: center; gap: 15px; }
 .gm-contact {
     font-size: 0.8rem; color: #ccc; font-style: italic;
@@ -272,7 +268,8 @@ h1, h2, h3, .section-title, .guild-sign, .text-gold {
 .prophecy-content { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; } 
 
 .desc-scroll-box {
-    height: 450px; 
+flex: 1;           /* 新增：讓它自動填滿剩餘的垂直空間 */
+    min-height: 0;     /* 新增：這是 Flex 容器內滾動的關鍵設定 */
     overflow-y: auto; margin-bottom: 1.5rem; padding-right: 5px; 
     scrollbar-color: var(--color-magic-pluma) #333; 
     flex-grow: 1; 
@@ -538,7 +535,7 @@ h1, h2, h3, .section-title, .guild-sign, .text-gold {
     background: rgba(10, 10, 10, 0.95); 
     border: 2px solid var(--color-text-stone); 
     border-radius: 10px; 
-    visibility: hidden; 
+    visibility: hidden; /* [修正] 預設隱藏 */
     opacity: 0; 
     pointer-events: none; 
     transition: opacity 0.3s ease, transform 0.3s ease; 
@@ -558,7 +555,7 @@ h1, h2, h3, .section-title, .guild-sign, .text-gold {
 }
 
 .location-popup.active { 
-    visibility: visible; 
+    visibility: visible; /* [修正] 啟動時顯示 */
     opacity: 1; 
     pointer-events: auto; 
     transform: translateX(0); 
@@ -590,118 +587,57 @@ h1, h2, h3, .section-title, .guild-sign, .text-gold {
 .popup-content::-webkit-scrollbar-thumb { background: var(--color-feather-accent); border-radius: 3px; }
 
 /* ==========================================================================
-   [最終版] 手機版與窄螢幕適配 (Mobile Responsiveness)
+   手機版與窄螢幕適配 (Mobile Responsiveness)
    ========================================================================== */
 @media (max-width: 768px) {
-    /* 全局：恢復原生游標，隱藏自訂游標 */
-    * { cursor: auto !important; }
-    .custom-cursor { display: none !important; }
-
-    /* 導覽列 HUD */
-    .game-hud { padding: 0 1rem; height: 60px; }
-    .guild-sign { font-size: 1rem; }
-    .disclaimer { font-size: 0.6rem; }
-    .gm-contact { display: none; } /* 手機版隱藏 GM 聯絡資訊以節省空間 */
-    .audio-control-panel { padding: 3px 10px; gap: 10px; }
-    .volume-slider-container { display: none; } /* 手機版隱藏音量條，保留靜音鈕 */
-    
-    /* 分頁按鈕下移 */
-    .nav-tabs { 
-        bottom: -50px; width: 90%; justify-content: center; 
-        background: rgba(0,0,0,0.8); border: 1px solid #555;
-    }
-    .tab-btn { padding: 8px 15px; font-size: 0.9rem; }
-
-    /* 首頁 Intro */
-    .hero-content { padding: 1.5rem; width: 90%; }
-    .hero-narrative.wide-narrative { font-size: 0.95rem; line-height: 1.6; }
-    .cta-button { padding: 12px 30px; font-size: 1.2rem; }
-    .orb-flotation-area { display: none; } /* 手機版隱藏光球以避免誤觸 */
-
-    /* 地圖 Map */
-    .map-intro-text { padding: 15px; font-size: 0.95rem; margin-top: 10px; width: 95%; }
+    .guild-sign { font-size: 1.2rem; }
+    .tab-btn { padding: 5px 10px; font-size: 0.9rem; }
+    .hero-content { padding: 1.5rem; width: 95%; }
+    .hero-narrative.wide-narrative { font-size: 0.9rem; }
+    .map-intro-text { padding: 10px; font-size: 0.9rem; }
     .map-stage-container { 
-        width: 100%; height: 50vh; margin-top: 10px;
-        aspect-ratio: auto; border-width: 2px;
+        width: 100%; max-width: 100%; 
+        height: 50vh; 
+        aspect-ratio: auto;
     }
-    /* 地圖彈窗改為底部滑出 (Bottom Sheet) */
+    
     .location-popup.side-left,
     .location-popup.side-right {
         right: 0; left: 0; bottom: 0; top: auto; 
-        width: 100%; height: 65vh; 
+        width: 100%; 
+        height: 60vh; 
         border-radius: 20px 20px 0 0;
-        transform: translateY(105%); /* 預設往下藏 */
+        transform: translateY(100%); 
     }
     .location-popup.active { transform: translateY(0); }
-    .popup-visual { height: 180px; }
-    .popup-content { padding: 1.2rem; }
+    .popup-visual { height: 150px; }
 
-    /* 命運輪盤 Character (垂直堆疊布局) */
-    #character.game-scene.active { padding-top: 90px; overflow-y: auto; display: block; }
-    .fate-layout { 
-        flex-direction: column; align-items: center; gap: 40px; 
-        padding-bottom: 50px; width: 95%; margin: 0 auto;
-    }
-    .prophecy-panel { width: 100%; text-align: center; padding-top: 0; order: 1; }
+    .fate-layout { flex-direction: column; align-items: center; gap: 40px; }
+    #character.game-scene.active { padding-top: 80px; }
+    .prophecy-panel { width: 90%; text-align: center; padding-top: 0; }
     .left-panel, .right-panel { align-items: center; text-align: center; }
-    .right-panel .tags-container { justify-content: center; }
-    .desc-scroll-box { height: 180px; } 
-    /* 輪盤縮小並置中 */
-    .aztec-wheel-container { 
-        transform: scale(0.55); margin: -100px 0; order: 2; 
-    }
-    #panel-race { order: 1; } /* 族裔放最上面 */
-    #panel-class { order: 3; margin-top: -20px; } /* 職業放最下面 */
-    /* 迷你屬性條調整位置 */
-    .stats-box-mini { 
-        top: auto; bottom: -70px; right: 50%; 
-        transform: translateX(50%) scale(0.9); 
-        width: 140px;
-    }
+    .stats-box-mini { top: 0; right: 10px; position: relative; margin: 0 auto 10px auto; }
+    .aztec-wheel-container { transform: scale(0.65); margin: -60px 0; }
+    .desc-scroll-box { 
+        height: 200px; /* 手機版維持固定高度，確保版面穩定 */
+        min-height: 0;
+    } 
 
-    /* 公會大廳 Guild (垂直手風琴) */
     .scenario-accordion {
         width: 95%; height: auto;
-        left: 50%; top: 50%; /* 位置上移 */
+        left: 50%; top: 55%; 
         transform: translate(-50%, -50%);
-        flex-direction: column; gap: 8px;
+        flex-direction: column; 
+        gap: 5px;
     }
-    .scenario-card { 
-        width: 100%; height: 70px; /* 收起高度 */
-        flex: none !important; 
-        transition: height 0.4s ease; 
-    }
-    .scenario-card.active { 
-        height: 420px; /* 展開高度 */
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); 
-    }
-    .card-title-overlay { font-size: 1.1rem; bottom: 15px; }
-    .detail-title { font-size: 1.5rem; }
-    .detail-meta { font-size: 0.85rem; gap: 10px; flex-wrap: wrap; }
+    .scenario-card { width: 100%; height: 60px; flex: none !important; transition: height 0.5s ease; }
+    .scenario-card.active { height: 400px; box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
+    .card-title-overlay { font-size: 1rem; bottom: 15px; }
+    .detail-title { font-size: 1.4rem; }
+    .detail-meta { font-size: 0.8rem; gap: 10px; }
     
-    /* NPC 與對話框調整 */
-    .npc-container { 
-        width: 200px; left: auto; right: -30px; bottom: 130px; 
-        opacity: 0.9; pointer-events: none;
-    }
-    .dialogue-box { 
-        width: 96%; padding: 15px 20px 15px 70px; /* 左側留空給卷軸圖示 */
-        bottom: 10px; 
-    }
-    .dialogue-name { top: -15px; left: 10px; font-size: 0.9rem; padding: 3px 15px; }
-    .dialogue-text { font-size: 0.95rem; min-height: 45px; line-height: 1.5; }
-    
-    /* 申請書圖示位置調整 */
-    .contract-floating-icon { 
-        top: auto; bottom: 15px; left: 15px; right: auto;
-        width: 50px; 
-    }
-    .icon-label { display: none; } /* 手機版隱藏文字標籤，只顯示圖示 */
-
-    /* 隱藏版權宣告 */
-    .copyright { display: none; }
-
-    /* 鸚鵡調整 */
-    .guide-parrot { width: 70px; height: 70px; bottom: 75px; right: 10px; }
-    .speech-bubble { bottom: 150px; right: 20px; width: 160px; font-size: 0.9rem; }
+    .npc-container { width: 250px; left: auto; right: -50px; bottom: 120px; opacity: 0.8; }
+    .dialogue-box { width: 95%; padding: 15px; bottom: 10px; }
+    .dialogue-text { font-size: 0.95rem; min-height: 50px; }
+    .contract-floating-icon { top: -30px; width: 60px; }
 }
