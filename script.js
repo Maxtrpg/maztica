@@ -279,14 +279,16 @@ const racesData = [
     { id: 'frog', name: "蛙人", img: "images/icon_frog.webp", abilities: ["友善溫和", "跳躍高手"], desc: "在馬茲提卡的水域地帶，除了居住著蜥蜴人之外，還有一群神秘的蛙人。關於蛙人的起源眾說紛紜，但學者們普遍認為是薩滿儀式出錯的意外結果。天性善良的蛙人是蜥蜴人食物之一，兩族之間時常有碰撞與衝突。因此許多蛙人部落為求庇護選擇和人類合作，現在在許多城市裡也能見到蛙人的蹤跡。但在蜥蜴人選擇出來和文明社會交流之後，現在兩族的衝突明顯減少，能較和平的共處。" }
 ];
 const classesData = [
-    { id: 'artisan', name: "工匠", img: "images/icon_artisan.webp", portrait: "images/icon_artisan.webp", type: "pluma", stats: [60, 80, 40], abilities: ["鍛造物品", "裝備強化"], desc: "工匠是一群將心血與歲月投注於技藝的人。憑藉雙手與知識，將自然界的材料化為堅固的器具、精美的飾品與實用的武器。工匠們懂得如何挑選最堅韌的黑曜石來製作鋒利的刃片，如何運用玉石、羽毛與金屬，打造出兼具美觀與象徵意義的裝飾品。他們的作品不僅是物質上的創造，更承載了部族與城邦的榮耀。" },
+    { id: 'artisan', name: "工匠", img: "images/icon_artisan.webp", portrait: "images/icon_artisan.webp", type: "pluma", stats: [60, 80, 40], abilities: ["鍛造物品", "裝備強化"], desc: "工匠是一群將心血與歲月投注於技藝的人。憑藉雙手與知識，將自然界的材料化為堅固的器具、精美的飾品與實用的武器。工匠們懂得如何挑選最堅韌的黑曜石來製作鋒利的刃片，如何運用玉石、羽毛與金屬，打造出兼具美觀與象徵意義的裝飾品。他們的作品不僅是物質上的創造，更承載了部族與城邦的榮耀。在遠古夸爾特與札爾特克的神戰背景下，善與惡的信徒互相攻伐，而在這場激盪中，誕生了兩種非凡的工匠傳承：羽織工匠與獸刻工匠。" },
     { id: 'hunter', name: "獵人", img: "images/icon_hunter.webp", portrait: "images/icon_hunter.webp", type: "hishna", stats: [70, 90, 30], abilities: ["狙擊高手", "陷阱大師"], desc: "在馬茲提卡廣袤的叢林與山谷之間，獵人是自然的探索者與守望者。他們熟悉林木的氣息、動物的習性，以及隱藏於濃密葉影中的危機。獵人不僅是弓矢與陷阱的能手，更是觀察的專家：一片斷裂的枝葉、一行輕微的足跡，對他們來說就是指引方向的路標。" },
     { id: 'warrior', name: "戰士", img: "images/icon_warrior.webp", portrait: "images/icon_warrior.webp", type: "hishna", stats: [95, 40, 30], abilities: ["武器大師", "主力輸出"], desc: "在馬茲提卡大陸，戰士是社會與城邦的支柱。他們不僅是戰場上的鬥士，更是部族榮耀的象徵。自少年起，戰士便接受嚴格訓練，學習如何在叢林與平原上求生，如何揮舞各式各樣的武器。對馬茲提卡人而言，武勇與榮譽往往決定一個人的地位，而戰士正是這份價值的化身。" },
     { id: 'bard', name: "詩人", img: "images/icon_bard.webp", portrait: "images/icon_bard.webp", type: "tonalli", stats: [50, 60, 80], abilities: ["鼓舞人心", "歌功頌神"], desc: "在馬茲提卡的文明中，詩人並非單純的吟遊者，而是知識的守護者與文化的傳承者。他們被稱為「花與歌之人」，透過詩句、音樂與舞蹈來頌揚神祇、記錄歷史、傳遞智慧。詩人的話語與旋律能凝聚族群的信念，使城邦在動盪與榮耀中維繫共同的記憶。" },
     { id: 'pochteca', name: "旅商", img: "images/icon_pochteca.webp", portrait: "images/icon_pochteca.webp", type: "pluma", stats: [40, 70, 95], abilities: ["能言善道", "情報掮客"], desc: "在馬茲提卡廣袤的大地上，旅商不僅是貨物的搬運者，更是聯繫城邦與部族的關鍵人物。他們走遍叢林、山谷與河道，帶來玉石、黑曜石、可可豆、羽毛、香料與珍貴藥材，用以交換各地的特產。旅商讓資源得以流通，也讓偏遠村落得以接觸外界的繁榮。然而，旅商的價值遠不止於貿易。當他們踏上漫長的旅程時，同時也承擔了情報傳遞的責任。這些情報能決定一場戰爭的走向，或讓一座城邦提前準備防禦。" },
     { id: 'knight', name: "騎士", img: "images/icon_knight.webp", portrait: "images/icon_knight.webp", type: "hishna", stats: [90, 30, 60], abilities: ["隊伍堅盾", "榮耀化身"], desc: "在馬茲提卡的城邦與部族社會中，騎士象徵著最高的榮耀與最沉重的責任。他們不僅是訓練有素的精銳戰士，更是信仰與軍事的代表。成為騎士意味著經歷無數戰役、累積戰功，並獲得城邦與神祇的認可。騎士肩負守護族群、維護秩序的使命，他們的存在不僅是武力的展現，更是榮耀與信仰的化身。在馬茲提卡，主要有兩個騎士團：鷹騎士團 和 豹騎士團" },
     { id: 'rogue', name: "盜賊", img: "images/icon_rogue.webp", portrait: "images/icon_rogue.webp", type: "hishna", stats: [80, 70, 40], abilities: ["潛行偷襲", "迅捷巧手"], desc: "盜賊是行走於陰影與光明之間的人物。他們不如戰士般光榮，也不像詩人般受人讚頌，卻是城邦與荒野中不可或缺的角色。盜賊擅長鑽研陷阱、開鎖與潛行，他們的眼睛總能比別人更快找到隱藏的財寶與秘密。對許多人來說，盜賊雖帶著不光彩的名聲，但在探索古老遺跡、解決危險任務時，他們卻往往是最可靠的同伴。" },
-    { id: 'shaman', name: "薩滿", img: "images/icon_shaman.webp", portrait: "images/icon_shaman.webp", type: "tonalli", stats: [60, 50, 40], abilities: ["魔法掌握", "神靈使者"], desc: "在馬茲提卡，大地與諸神的力量並未隨著神祇隱沒而完全消失。薩滿是最接近這股神秘力量的人，他們能觸碰凡人無法理解的能量，並以詩歌、祈禱、舞蹈或獻祭的方式引導魔法流動。薩滿的角色不僅是施術者，更是靈性導師、祭儀主持者與未知奧秘的研究者。薩滿對於魔法的本質有不同解讀，因此形成了四種截然不同的流派。" },
+    { id: 'shaman', name: "薩滿", img: "images/icon_shaman.webp", portrait: "images/icon_shaman.webp", type: "tonalli", stats: [60, 50, 40], abilities: ["魔法掌握", "神靈使者"], desc: "在馬茲提卡，大地與諸神的力量並未隨著神祇隱沒而完全消失。薩滿是最接近這股神秘力量的人，他們能觸碰凡人無法理解的能量，並以詩歌、祈禱、舞蹈或獻祭的方式引導魔法流動。薩滿的角色不僅是施術者，更是靈性導師、祭儀主持者與未知奧秘的研究者。
+
+而現今的六大魔法流派，本質上代表了過去眾神之戰的歷史。在這個眾神退去、神聖閥門破碎的第六紀元，舊有的秩序正在崩塌。你必須選擇一條「靈性之道」作為你的力量之源：是延續古老的守護誓言，擁抱以血換血的霸權，還是駕馭新生的野性洪流？" },
     { id: 'farmer', name: "農民", img: "images/icon_farmer.webp", portrait: "images/icon_farmer.webp", type: "elemental", stats: [30, 90, 60], abilities: ["種植烹飪", "生活大師"], desc: "在馬茲提卡這塊大陸，農民並非單純耕作之人，而是最貼近大自然循環的守護者。他們掌握古老的浮田技術，能在湖泊與水道中建造人工小島，種植農作物，同時利用水域的魚群與水草來滋養土壤。農民懂得如何從水域捕撈魚類，如何利用淤泥與水草肥沃土地，也知道哪些植物能作為食物，哪些則是祭品或藥材。他們在日常看似平凡，卻是社會中不可或缺的一環。沒有農民的智慧與辛勤，沒有任何城邦能長久屹立。" },
     { id: 'scholar', name: "學者", img: "images/icon_scholar.webp", portrait: "images/icon_scholar.webp", type: "elemental", stats: [30, 70, 65], abilities: ["隊伍智囊", "律法大師"], desc: "在馬茲提卡的城邦裡，學者代表著知識的傳承與探索。這片大地上的人類社會極為重視教育：兒童在十五歲之前由家長教育，學習基礎的倫理、勞作與信仰，並受公社監督。十五歲後，他們進入城邦學校，接受五年的進階教育。隨著不同族裔與人類的交流加深，學校裡也能看到半身人、矮人，甚至其他族群的學生，共同參與知識的學習。" }
 ];
@@ -508,4 +510,5 @@ function initCustomCursor() {
         el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
         el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
     });
+
 }
